@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArtFlow - Showcase</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .upload-btn {
+            display: inline-block;
+            padding: 10px 15px;
+            background: #5a4fff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        .art-grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        #imagePreview img {
+            width: 250px;
+            border-radius: 10px;
+            margin: 10px;
+        }
+
+        .art-item {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+         <h1 class="logo-title">
+    <a href="index.html">
+        <img src="Artflow logo.jpeg" alt="ArtFlow Logo" class="logo-img">
+        ArtFlow
+    </a>
+</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="explore.html">Explore (Visitor)</a></li>
+                <li><a href="showcase.html">Showcase (Artist)</a></li>
+                <li><a href="login.html">Login/Sign Up</a></li>
+                <li><a href="commissions.html">Commissions</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>✨ Showcase: The Artist's Studio</h2>
+        <p>This is your space to shine. Upload your art and it will appear below instantly.</p>
+
+        <section class="card">
+            <h3>Artist Dashboard</h3>
+            <p>Welcome, <strong>Talented Creator!</strong></p>
+
+            <input type="file" id="uploadInput" accept="image/*" style="display:none" onchange="previewImage(event)">
+            <a class="upload-btn" onclick="document.getElementById('uploadInput').click();">Upload New Art</a>
+        </section>
+
+        <section class="card">
+            <h3>Your Featured Work</h3>
+
+            <div class="art-grid" id="imagePreview">
+
+                <!-- ⭐ Pre-added Sample Artworks ⭐ -->
+                <div class="art-item">
+                    <img src="https://thumbs.dreamstime.com/b/african-girl-holds-sun-digital-painting-canvas-artwork-original-warm-colors-amazing-beauty-127438732.jpg" alt="Artwork 1">
+                    <p><strong>Status:</strong> Featured</p>
+                </div>
+
+                <div class="art-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmZRYmHQ8KrfE2mNTSB_xZ3SeTihy_fJ2Z_w&s" alt="Artwork 2">
+                    <p><strong>Status:</strong> Featured</p>
+                </div>
+
+                <div class="art-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ90wxdZ-2c54SPPKLjcf1qw4V7Y6uDemLpuA&s" alt="Artwork 3">
+                    <p><strong>Status:</strong> Featured</p>
+                </div>
+
+                
+
+                <!-- Uploaded images will appear here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Script for showing uploaded images -->
+    <script>
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const imgElement = document.createElement("div");
+                imgElement.classList.add("art-item");
+                imgElement.innerHTML = `
+                    <img src="${e.target.result}" alt="Uploaded Art">
+                    <p><strong>Status:</strong> Uploaded</p>
+                `;
+                document.getElementById("imagePreview").appendChild(imgElement);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    </script>
+
+</body>
+</html>
